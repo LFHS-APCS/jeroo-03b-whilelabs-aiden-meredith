@@ -17,9 +17,10 @@ public class Jeroo extends JerooBase {
         while (!isNet(AHEAD)) // Step 2: Iterate the opposite of Step 1
         {
             hop();  // Step 3:  Make progress towards the goal
-        }
+        } 
+
         // Step 1:  At the end, there should be a net in front
-    }
+    } 
     
     /**
      * Clear all the flowers in front of the Jeroo until it there is water in front.
@@ -33,12 +34,14 @@ public class Jeroo extends JerooBase {
      */
     public void clearFlowersToWater() 
     {
-        // while(<test>) //Step 2: Use the opposite of Step 1's result as the <test>
+      pick();
+        while (!isWater(AHEAD))// while(<test>) //Step 2: Use the opposite of Step 1's result as the <test>
         {
-            // Step 3:  Make progress towards the goal inside the loop
-            
-        }
-        // Step 1:  At the end of the while loop, what should be true?
+           hop();
+           pick();
+            // Step 3:  Make progress towards the goal inside the loop  
+        } 
+        // Step 1:  At the end of the while loop, what should be true? All of the flowers should be picked before we get to the water
         
     }
 
@@ -51,6 +54,12 @@ public class Jeroo extends JerooBase {
      */
     public void faceNorth() {
 
+      while (!isFacing(NORTH)) // step 2: opposite of step1
+      {
+        turn(LEFT); /// step 3: make progress towards facingNorth
+      }
+      // step 1 isFacing(NORTH))
+
     }
 
     /**
@@ -58,6 +67,23 @@ public class Jeroo extends JerooBase {
      * no matter where it is or which way it is facing.
      */
     public void goToOrigin() {
+
+      faceNorth();
+      while (!isWater(AHEAD))
+      {
+        hop();
+      } 
+      
+      turn(LEFT);
+      
+      while (!isWater(AHEAD))
+      {
+        hop();
+      } 
+      
+      
+
+      
 
     }
 
@@ -67,6 +93,42 @@ public class Jeroo extends JerooBase {
      * The Jeroo should stop as soon as there is a net in front of it.       
      */
     public void meander() {
+       while (!isNet(AHEAD)) {
+         if(isFlower(AHEAD)){
+           hop();
+         } else if(isFlower(LEFT)){
+           turn(LEFT);
+           hop();
+         } else if(isFlower(RIGHT)){
+           turn(RIGHT);
+           hop();
+         } else if(isNet(AHEAD)) {
+
+         }
+    
+
+         
+       }
+      /*
+      while if(isFlower(AHEAD)){
+        hop;
+      } else{}
+        while if(isFlower(LEFT)){
+          turn(LEFT);
+          hop();
+        } else{}
+          while if(isFlower(RIGHT)){
+            turn(RIGHT);
+            hop();
+          } else{}
+      while if(isNet(AHEAD))
+      {
+        stop();
+      } else {
+
+      }
+ */
+
 
     }
 
